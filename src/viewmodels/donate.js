@@ -21,8 +21,6 @@ export class Donate {
   }
 
   makeDonation() {
-    console.log(`Amount = ${this.amount}`);
-    console.log(`Method = ${this.selectedMethod}`);
-    console.log(`Candidate = ${this.selectedCandidate.firstName} ${this.selectedCandidate.lastName}`);
+    this.donationService.donate(this.amount, this.selectedMethod, this.selectedCandidate);
   }
 }

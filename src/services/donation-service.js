@@ -17,7 +17,8 @@ export default class DonationService {
   donate(amount, method, candidate) {
     const donation = {
       amount: amount,
-      method: method
+      method: method,
+      candidate: candidate
     };
     this.donations.push(donation);
     console.log(amount + ' donated to ' + candidate.firstName + ' ' + candidate.lastName + ': ' + method);
