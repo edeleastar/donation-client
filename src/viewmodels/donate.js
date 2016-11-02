@@ -1,20 +1,24 @@
+import {inject} from 'aurelia-framework';
+import DonationService from '../services/donation-service';
+
+@inject(DonationService)
 export class Donate {
 
-  amount = 5;
-  methods = ['Cash', 'PayPal'];
-  selectedMethod = 'Cash';
+  amount = 0;
 
-  candidates = [
-    {
-      firstName: 'Lisa',
-      lastName: 'Simpson'
-    },
-    {
-      firstName: 'Bart',
-      lastName: 'Simpson'
-    }
-  ];
-  selectedCandidate = this.candidates[0];
+  methods = [];
+  selectedMethod = '';
+
+  candidates = [];
+  selectedCandidate = '';
+
+  constructor(ds) {
+    this.donationService = ds;
+    this.methods = ds.methods;
+    this.selectedMethod = this.methods[0];
+    this.candidates = ds.candidates;
+    this.selectedCandidate = this.candidates[0];
+  }
 
   makeDonation() {
     console.log(`Amount = ${this.amount}`);
