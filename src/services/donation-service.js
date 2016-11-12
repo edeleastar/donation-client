@@ -43,6 +43,16 @@ export default class DonationService {
     this.candidates.push(candidate);
   }
 
+  register(firstName, lastName, email, password) {
+    const newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    };
+    this.users[email] = newUser;
+  }
+
   login(email, password) {
     const status = {
       success: false,
