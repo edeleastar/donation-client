@@ -9,9 +9,11 @@ export default class DonationService {
   donations = [];
   methods = [];
   candidates = [];
+  users = [];
   total = 0;
 
   constructor(data, ea) {
+    this.users = data.users;
     this.donations = data.donations;
     this.candidates = data.candidates;
     this.methods = data.methods;
@@ -40,4 +42,25 @@ export default class DonationService {
     };
     this.candidates.push(candidate);
   }
+
+  login(email, password) {
+    const status = {
+      success: false,
+      message: ''
+    };
+
+    if (this.users[email]) {
+      if (this.users[email].password === password) {
+        status.success = true;
+        status.message = 'logged in';
+      } else {
+        status.message = 'Incorrect password';
+      }
+    } else {
+      status.message = 'Unknown user';
+    }
+
+    return status;
+  }
+
 }
