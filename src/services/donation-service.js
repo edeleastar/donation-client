@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 import Fixtures from './fixtures';
-import {TotalUpdate} from './messages';
+import {TotalUpdate, LoginStatus} from './messages';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
 @inject(Fixtures, EventAggregator)
@@ -69,8 +69,14 @@ export default class DonationService {
     } else {
       status.message = 'Unknown user';
     }
-
-    return status;
+    this.ea.publish(new LoginStatus(status));
   }
 
+  logout() {
+    const status = {
+      success: false,
+      message: ''
+    };
+    this.ea.publish(new LoginStatus(new LoginStatus(status)));
+  }
 }
