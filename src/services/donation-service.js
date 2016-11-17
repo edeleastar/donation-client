@@ -73,17 +73,11 @@ export default class DonationService {
   }
 
   login(email, password) {
-    const status = {
-      success: false,
-      message: 'Login Attempt Failed'
+    const user = {
+      email: email,
+      password: password
     };
-    for (let user of this.users) {
-      if (user.email === email && user.password === password) {
-        status.success = true;
-        status.message = 'logged in';
-      }
-    }
-    this.ea.publish(new LoginStatus(status));
+    this.ac.authenticate('/api/users/authenticate', user);
   }
 
   logout() {
@@ -91,6 +85,7 @@ export default class DonationService {
       success: false,
       message: ''
     };
+    this.ac.clearAuthentication();
     this.ea.publish(new LoginStatus(new LoginStatus(status)));
   }
 }
