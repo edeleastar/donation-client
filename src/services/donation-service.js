@@ -55,7 +55,9 @@ export default class DonationService {
       lastName: lastName,
       office: office
     };
-    this.candidates.push(candidate);
+    this.ac.post('/api/candidates', candidate).then(res => {
+      this.candidates.push(res.content);
+    });
   }
 
   register(firstName, lastName, email, password) {
@@ -65,7 +67,9 @@ export default class DonationService {
       email: email,
       password: password
     };
-    this.users[email] = newUser;
+    this.ac.post('/api/users', newUser).then(res => {
+      this.getUsers();
+    });
   }
 
   login(email, password) {
