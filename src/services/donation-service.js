@@ -18,7 +18,10 @@ export default class DonationService {
     this.ea = ea;
     this.ac = ac;
     this.getCandidates();
-    this.getUsers();
+  }
+
+  isAuthenticated() {
+    return this.ac.isAuthenticated();
   }
 
   getCandidates() {
