@@ -15,6 +15,18 @@ export default class AsyncHttpClient {
     this.ea = ea;
   }
 
+  isAuthenticated() {
+    let authenticated = false;
+    if (localStorage.donation !== 'null') {
+      authenticated = true;
+      this.http.configure(http => {
+        const auth = JSON.parse(localStorage.donation);
+        http.withHeader('Authorization', 'bearer ' + auth.token);
+      });
+    }
+    return authenticated;
+  }
+
   authenticate(url, user) {
     this.http.post(url, user).then(response => {
       const status = response.content;
@@ -28,7 +40,7 @@ export default class AsyncHttpClient {
     }).catch(error => {
       const status = {
         success: false,
-        message: 'service not avilable'
+        message: 'service not available'
       };
       this.ea.publish(new LoginStatus(status));
     });
