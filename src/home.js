@@ -16,6 +16,11 @@ export class Home {
       { route: 'dashboard', name: 'dashboard', moduleId: 'viewmodels/dashboard/dashboard', nav: true, title: 'Dashboard' },
       { route: 'logout', name: 'logout', moduleId: 'viewmodels/logout/logout', nav: true, title: 'Logout' }
     ]);
+
+    config.mapUnknownRoutes(instruction => {
+      return 'dashboard';
+    });
+
     this.router = router;
   }
 }
