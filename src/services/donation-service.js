@@ -89,6 +89,6 @@ export default class DonationService {
       message: ''
     };
     this.ac.clearAuthentication();
-    this.ea.publish(new LoginStatus(new LoginStatus(status)));
+    this.ea.publish(new LoginStatus(status));
   }
 }
